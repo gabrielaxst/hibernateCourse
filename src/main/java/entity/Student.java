@@ -32,8 +32,7 @@ public class Student {
 		this.guide = guide;
 	}	
 
-	public Student(Integer id, String nome, String curso, Guide guide, Integer flagAtivo) {
-		this.id = id;
+	public Student(String nome, String curso, Guide guide, Integer flagAtivo) {
 		this.nome = nome;
 		this.curso = curso;
 		this.guide = guide;
@@ -63,6 +62,10 @@ public class Student {
 	public Guide getGuide() {
 		return guide;
 	}
+	
+	public String getGuideName() {
+		return guide != null ? guide.getName() : "------";
+	}
 
 	public void setGuide(Guide guide) {
 		this.guide = guide;
@@ -79,7 +82,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", nome=" + nome + ", curso=" + curso + ", guide=" + guide + ", merito=" + "]";
+		return "Student [id=" + id + ", nome=" + nome + ", curso=" + curso + ", guide=" + getGuideName()+ ", merito=" + "]";
 	}
 
 }
