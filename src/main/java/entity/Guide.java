@@ -9,11 +9,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import mapper.EntityMapper;
 
 @Entity
+@NamedQuery(name = "Guide.findById", query = "SELECT g FROM Guide g WHERE g.id = :id")
 public class Guide {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
