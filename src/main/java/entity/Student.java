@@ -7,8 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name= "findById", query = "SELECT s FROM Student s WHERE s.id = :id")
+})
 public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
