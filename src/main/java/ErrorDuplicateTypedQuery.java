@@ -12,6 +12,9 @@ public class ErrorDuplicateTypedQuery {
 		EntityManager em = emf.createEntityManager();
 
 		try {
+			/*
+			 * Named query tem escopo global, por isso não podemos ter elas com nomes repetidos
+			 */
 			TypedQuery<Student> queryStu = em.createNamedQuery("findById", Student.class);
 			queryStu.setParameter("id", 1);
 			Student s = queryStu.getSingleResult();
@@ -22,7 +25,7 @@ public class ErrorDuplicateTypedQuery {
 				em.getTransaction().rollback();
 			}
 		} finally {
-			em.clear();
+			em.close();
 		}
 	}
 
