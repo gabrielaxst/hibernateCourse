@@ -66,6 +66,7 @@ public class Guide {
 	}
 	
 	public void setStudents(Student student) {
+		student.setGuide(this);
 		getStudents().add(student);
 	}
 

@@ -1,5 +1,8 @@
 package entity;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.Transient;
 
 @Entity
 @NamedQueries({
@@ -22,6 +27,12 @@ public class Student {
 	private String nome;
 
 	private String curso;
+	
+	private LocalDate dataNascimento;
+	
+	//faz com um atributo não seja mapeada para coluna no bd
+	@Transient
+	private Integer idade;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "guide_id")
@@ -40,6 +51,16 @@ public class Student {
 	public Student(String nome, String curso, Guide guide, Integer flagAtivo) {
 		this.nome = nome;
 		this.curso = curso;
+		this.guide = guide;
+		this.flagAtivo = flagAtivo;
+	}
+
+	public Student(Integer id, String nome, String curso, LocalDate dataNascimento, Guide guide,
+			Integer flagAtivo) {
+		this.id = id;
+		this.nome = nome;
+		this.curso = curso;
+		this.dataNascimento = dataNascimento;
 		this.guide = guide;
 		this.flagAtivo = flagAtivo;
 	}
@@ -85,9 +106,16 @@ public class Student {
 		this.flagAtivo = flagAtivo;
 	}
 
+	//método de callback, será excecutado quando a entidade é carregada do bd
+	@PostLoad
+	public void setIdade() {
+		this.idade = Period.between(dataNascimento, LocalDate.now()).getYears();
+		System.out.println(this.idade);
+	}
+	
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", nome=" + nome + ", curso=" + curso + ", guide=" + getGuideName()+ ", merito=" + "]";
+		return "Student [id=" + id + ", nome=" + nome + ", curso=" + curso + ", guide=" + getGuideName()+ ", idade=" + idade + "]";
 	}
 
 }
