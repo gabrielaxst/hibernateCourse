@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import mapper.EntityMapper;
 
-@Entity
+//@Entity
 @NamedQueries({
 	@NamedQuery(name = "Guide.findById", query = "SELECT g FROM Guide g WHERE g.id = :id"),
 	//Named query com o mesmo valor para name lançam uma exception

@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name = "tb_client_address")
 public class ClientAddress {
 	@EmbeddedId

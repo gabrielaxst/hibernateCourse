@@ -15,7 +15,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.Transient;
 
-@Entity
+//@Entity
 @NamedQueries({
 	@NamedQuery(name= "findById", query = "SELECT s FROM Student s WHERE s.id = :id")
 })

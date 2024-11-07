@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name = "tb_professor")
 public class Teacher {
 	@Id

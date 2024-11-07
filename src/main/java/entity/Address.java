@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name = "tb_address")
 public class Address {
 	@Id

@@ -1,8 +1,5 @@
 package application;
 
-import com.azul.crs.client.sysinfo.SystemInfoProvider.OS;
-
-import entity.Guide;
 import entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
