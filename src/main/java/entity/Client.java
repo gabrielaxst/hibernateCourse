@@ -42,10 +42,10 @@ public class Client {
 		this.name = name;
 	}
 	
-	@PrePersist
-	public void executarAoPersistir() {
-		System.out.println("o método prepersist da minha acc foi executado.");
-	}
+	/*
+	 * @PrePersist public void executarAoPersistir() {
+	 * System.out.println("o método prepersist da minha acc foi executado."); }
+	 */
 	
 	/*
 	 * não podemos ter mais de uma mesma anotação de lifecycle callbacks em um entidade

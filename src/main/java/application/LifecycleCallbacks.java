@@ -17,15 +17,20 @@ public class LifecycleCallbacks {
 		try {
 			tran.begin();
 			
-			AccountBank ac1 = new AccountBank(80000.0);
+			AccountBank ac1 = new AccountBank(new Client(null, "Maria Arcari"), 4000.0);
 			
 			em.persist(ac1);
-			
-			/*
-			 * System.out.println("isso vai executar antes do método PostPersist,");
-			 * System.out.println("pois a geração do id é com sequence." +
-			 * "e o insert só é feito ao commit");
+			//em.flush();
+			/**
+			 * esse método irá executar antes da variável 'save' ser setada
+			 * pois quando o id de uma entidade é gerado com sequence
+			 * o comando de insert só é feito ao realizar o commit()
+			 * então o método com anotação PostPersist não será executado logo 
+			 * após o método de persist ser executado, mas no de commit()
+			 * podemos utilizar o flush() para contornar
 			 */
+			ac1.validarAmountAcc();
+		
 			
 			tran.commit();
 			
@@ -36,5 +41,10 @@ public class LifecycleCallbacks {
 		} finally {
 			em.close();
 		}
+	}
+	
+	public static String alteraNome(String nome) {
+		String nomeAlterado = "Cliente -> " + nome;
+		return nomeAlterado;
 	}
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.PostPersist;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_account")
@@ -31,6 +32,9 @@ public class AccountBank {
 	@Column(name = "ds_account")
 	private String accountType;
 
+	@Transient
+	private boolean save;
+	
 	public AccountBank() {
 	}
 
@@ -78,8 +82,19 @@ public class AccountBank {
 	}
 
 	@PostPersist
-	public void accountInserted() {
-		System.out.println("a conta com id: " + getId() + " foi gerada.");
+	public void checkAccountAmount() {
+		if (getInitialAmount() % 2 == 0) {
+			save = true;
+		}
+	
+	}
+	
+	public void validarAmountAcc() {
+		if (save) {
+			System.out.println("par");
+		} else {
+			System.out.println("impar");
+		}
 	}
 	
 	@Override
