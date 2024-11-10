@@ -86,7 +86,6 @@ public class AccountBank {
 		if (getInitialAmount() % 2 == 0) {
 			save = true;
 		}
-	
 	}
 	
 	public void validarAmountAcc() {

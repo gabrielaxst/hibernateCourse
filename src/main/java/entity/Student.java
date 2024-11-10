@@ -5,6 +5,7 @@ import java.time.Period;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,11 +15,13 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.Transient;
+import listenner.EntityListenner;
 
-//@Entity
+@Entity
 @NamedQueries({
 	@NamedQuery(name= "findById", query = "SELECT s FROM Student s WHERE s.id = :id")
 })
+@EntityListeners(EntityListenner.class)
 public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,13 +58,12 @@ public class Student {
 		this.flagAtivo = flagAtivo;
 	}
 
-	public Student(Integer id, String nome, String curso, LocalDate dataNascimento, Guide guide,
+	public Student(Integer id, String nome, String curso, LocalDate dataNascimento,
 			Integer flagAtivo) {
 		this.id = id;
 		this.nome = nome;
 		this.curso = curso;
 		this.dataNascimento = dataNascimento;
-		this.guide = guide;
 		this.flagAtivo = flagAtivo;
 	}
 

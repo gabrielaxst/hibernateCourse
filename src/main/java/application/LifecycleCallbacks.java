@@ -20,7 +20,7 @@ public class LifecycleCallbacks {
 			AccountBank ac1 = new AccountBank(new Client(null, "Maria Arcari"), 4000.0);
 			
 			em.persist(ac1);
-			//em.flush();
+			em.flush();
 			/**
 			 * esse método irá executar antes da variável 'save' ser setada
 			 * pois quando o id de uma entidade é gerado com sequence

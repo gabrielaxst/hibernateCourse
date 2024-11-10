@@ -6,6 +6,7 @@ import java.util.List;
 import dto.StudentDto;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,16 +14,17 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import listenner.EntityListenner;
 import mapper.EntityMapper;
 
-//@Entity
+@Entity
 @NamedQueries({
 	@NamedQuery(name = "Guide.findById", query = "SELECT g FROM Guide g WHERE g.id = :id"),
 	//Named query com o mesmo valor para name lançam uma exception
 	//@NamedQuery(name = "findById", query = "SELECT g FROM Guide g WHERE g.id = :id"),
 
 })
-
+@EntityListeners(EntityListenner.class)
 public class Guide {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
