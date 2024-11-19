@@ -6,6 +6,7 @@ import java.time.Period;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +20,8 @@ import listenner.EntityListenner;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name= "findById", query = "SELECT s FROM Student s WHERE s.id = :id")
+	@NamedQuery(name= "findById", query = "SELECT s FROM Student s WHERE s.id = :id"),
+	@NamedQuery(name = "findAllStudent", query = "SELECT s FROM Student s")
 })
 @EntityListeners(EntityListenner.class)
 public class Student {
@@ -33,11 +35,11 @@ public class Student {
 	
 	private LocalDate dataNascimento;
 	
-	//faz com um atributo não seja mapeada para coluna no bd
+	//faz com que um atributo não seja mapeado para coluna no bd
 	@Transient
 	private Integer idade;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST })
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "guide_id")
 	private Guide guide;
 
@@ -111,8 +113,10 @@ public class Student {
 	//método de callback, será excecutado quando a entidade é carregada do bd
 	@PostLoad
 	public void setIdade() {
-		this.idade = Period.between(dataNascimento, LocalDate.now()).getYears();
-		System.out.println(this.idade);
+		if (dataNascimento != null) {
+			this.idade = Period.between(dataNascimento, LocalDate.now()).getYears();
+			System.out.println(this.idade);
+		}
 	}
 	
 	@Override

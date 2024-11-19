@@ -27,6 +27,9 @@
 
 			<!-- Pretty print the SQL in the log file and console -->
 			<property name="hibernate.format_sql" value="true" />
+			
+			<!-- Batch processing -->
+			<property name="hibernate.jdbc.batch_size" value="5"/>
 		</properties>
 
 	</persistence-unit>
